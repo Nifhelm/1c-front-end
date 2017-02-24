@@ -46,7 +46,7 @@ var canvas = document.getElementById("sandbox")
     console.log(hs, ms, ss);
     ssAngle = (ss / 60) * (2 * Math.PI);
     msAngle = (ms / 60) * (2 * Math.PI);
-    hsAngle = ((hs % 12) / 12) * (Math.PI);
+    hsAngle = ((hs % 12) / 12) * (2 * Math.PI);
     ssAngle = Math.PI / 2 - ssAngle;
     msAngle = Math.PI / 2 - msAngle;
     hsAngle = Math.PI / 2 - hsAngle;
