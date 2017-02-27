@@ -1,8 +1,4 @@
-var canvas = document.getElementById("sandbox")
-    , context = canvas.getContext("2d")
-    , square, circle;
-
-
+var canvas = document.getElementById("sandbox"), context = canvas.getContext("2d");
 
 function krug() {
 
@@ -30,7 +26,7 @@ function krug() {
         square.lineTo(pX, pY);
         context.stroke(square);
     }
-}
+  }
 
 
 function strelki() {
@@ -77,6 +73,7 @@ function strelki() {
     minute.lineTo(mpX, mpY);
     context.strokeStyle = "#000000";
     context.stroke(minute);
+
     var R = 300 / 2, spX, spY;
 
     spX = Math.cos(ssAngle) * R;
@@ -90,7 +87,7 @@ function strelki() {
     second.lineTo(spX, spY);
     context.strokeStyle = "#FF0000";
     context.stroke(second);
-    }
+}
 
 
 function DrawWatch() {
