@@ -1,4 +1,7 @@
-var canvas = document.getElementById("sandbox"), context = canvas.getContext("2d");
+var canvas = document.getElementById("sandbox");
+var context = canvas.getContext("2d");
+var circle;
+var square;
 
 function krug() {
 
@@ -26,7 +29,7 @@ function krug() {
         square.lineTo(pX, pY);
         context.stroke(square);
     }
-  }
+}
 
 
 function strelki() {
