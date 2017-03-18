@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <ul id="list"></ul>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        function generateList(array) {
+            var list = $("#list");
+            list.html();
+            array.forEach(function(item) {
+                list.append("<li>" + item + "</li>");
+            });
+        }
+        /**/
+    </script>
+</body>
+</html>
