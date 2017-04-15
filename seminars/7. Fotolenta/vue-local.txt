@@ -1,0 +1,2 @@
+npm install vue@1.0.28 --save
+npm install vueify@8.7.0 babel-core babel-preset-es2015 babel-runtime babel-plugin-transform-runtime --save-dev
