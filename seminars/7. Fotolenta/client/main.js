@@ -1,5 +1,10 @@
 var Vue = require('vue');
 var vueRouter = require('vue-router');
+var VueResourse = require('vue-resource');
+var VueJwtMongo = require('vue-jwt-mongo');
+
+Vue.use(VueResourse);
+Vue.use(VueJwtMongo.Client);
 
 Vue.use(vueRouter);
 
