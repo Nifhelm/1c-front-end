@@ -183,6 +183,100 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],3:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-731435bc] {\n    width: 50%;\n}\n\nform[_v-731435bc] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n")
+'use strict';
+
+module.exports = {
+    methods: {
+        upload: function upload(event) {
+            event.preventDefault();
+            var form = event.target;
+            var formData = new FormData(form);
+            this.$http.post('/upload', formData, { bearer: true }).then(function (response) {
+                console.log(response);
+            });
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\" _v-731435bc=\"\">\n    <form v-on:submit=\"upload\" _v-731435bc=\"\">\n        <input type=\"file\" accept=\"image/*\" name=\"picture\" _v-731435bc=\"\">\n        <button type=\"submit\" _v-731435bc=\"\">Загрузить!</button>\n    </form>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["\n.container[_v-731435bc] {\n    width: 50%;\n}\n\nform[_v-731435bc] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-731435bc", module.exports)
+  } else {
+    hotAPI.update("_v-731435bc", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":15,"vue-hot-reload-api":11,"vueify/lib/insert-css":16}],4:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+  ready: function ready() {
+    if (this.$auth.isLoggedIn()) {
+      this.$router.go('/feed');
+    } else {
+      this.$router.go('/login');
+    }
+  }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-23eb16a4", module.exports)
+  } else {
+    hotAPI.update("_v-23eb16a4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":15,"vue-hot-reload-api":11}],5:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-24da8c8a]{\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-24da8c8a] {\n  margin: 10px 0;\n}\n")
+'use strict';
+
+module.exports = {
+  data: function data() {
+    return {
+      username: '',
+      password: ''
+    };
+  },
+  methods: {
+    login: function login() {
+      this.$auth.logIn(this.username, this.password).then(function (respone) {
+        this.$router.go('/feed');
+      }).catch(function (response) {
+        console.log(response);
+      });
+    }
+  }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"form-group container\" _v-24da8c8a=\"\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Логин\" v-model=\"username\" _v-24da8c8a=\"\">\n    <input type=\"password\" class=\"form-control\" placeholder=\"Пароль\" v-model=\"password\" _v-24da8c8a=\"\">\n    <button type=\"button\" class=\"btn btn-primary btn-block\" v-on:click=\"login\" _v-24da8c8a=\"\">\n      Войти!\n    </button><button type=\"button\" class=\"btn btn-default btn-block\" v-on:click=\"register\" _v-24da8c8a=\"\">\n      Регистрация\n    </button>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["\n.container[_v-24da8c8a]{\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-24da8c8a] {\n  margin: 10px 0;\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-24da8c8a", module.exports)
+  } else {
+    hotAPI.update("_v-24da8c8a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":15,"vue-hot-reload-api":11,"vueify/lib/insert-css":16}],6:[function(require,module,exports){
 var Vue = require('vue');
 var vueRouter = require('vue-router');
 var VueResourse = require('vue-resource');
@@ -194,15 +288,23 @@ Vue.use(VueJwtMongo.Client);
 Vue.use(vueRouter);
 
 var Register = require('./register.vue');
+var Login = require('./login.vue');
+var Feed = require('./feed.vue');
+var Index = require('./index.vue');
+
 var router = new vueRouter();
 
+
 router.map({
-    '/register': { component: Register }
+    '/register': { component: Register },
+    '/login': { component: Login },
+    '/feed': {component: Feed },
+    '/': { component: Index }
 });
 
 router.start(Vue.extend({}), '#app');
 
-},{"./register.vue":14,"vue":12,"vue-jwt-mongo":9,"vue-resource":10,"vue-router":11}],4:[function(require,module,exports){
+},{"./feed.vue":3,"./index.vue":4,"./login.vue":5,"./register.vue":17,"vue":15,"vue-jwt-mongo":12,"vue-resource":13,"vue-router":14}],7:[function(require,module,exports){
 /**
  * The code was extracted from:
  * https://github.com/davidchambers/Base64.js
@@ -242,7 +344,7 @@ function polyfill (input) {
 
 module.exports = typeof window !== 'undefined' && window.atob && window.atob.bind(window) || polyfill;
 
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var atob = require('./atob');
 
 function b64DecodeUnicode(str) {
@@ -277,7 +379,7 @@ module.exports = function(str) {
   }
 };
 
-},{"./atob":4}],6:[function(require,module,exports){
+},{"./atob":7}],9:[function(require,module,exports){
 'use strict';
 
 var base64_url_decode = require('./base64_url_decode');
@@ -305,7 +407,7 @@ module.exports = function (token,options) {
 
 module.exports.InvalidTokenError = InvalidTokenError;
 
-},{"./base64_url_decode":5}],7:[function(require,module,exports){
+},{"./base64_url_decode":8}],10:[function(require,module,exports){
 /*!
  * @name JavaScript/NodeJS Merge v1.2.0
  * @author yeikos
@@ -481,7 +583,7 @@ module.exports.InvalidTokenError = InvalidTokenError;
 	}
 
 })(typeof module === 'object' && module && typeof module.exports === 'object' && module.exports);
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var Vue // late bind
 var map = Object.create(null)
 var shimmed = false
@@ -782,7 +884,7 @@ function format (id) {
   return match ? match[0] : id
 }
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 var merge = require('merge');
@@ -878,7 +980,7 @@ function installVuePlugin(Vue, options) {
 module.exports = {
     Client: installVuePlugin
 };
-},{"jwt-decode":6,"merge":7}],10:[function(require,module,exports){
+},{"jwt-decode":9,"merge":10}],13:[function(require,module,exports){
 /*!
  * vue-resource v1.3.1
  * https://github.com/pagekit/vue-resource
@@ -2424,7 +2526,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 module.exports = plugin;
 
-},{"got":1}],11:[function(require,module,exports){
+},{"got":1}],14:[function(require,module,exports){
 /*!
  * vue-router v0.7.13
  * (c) 2016 Evan You
@@ -5134,7 +5236,7 @@ module.exports = plugin;
   return Router;
 
 }));
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (process){
 /*!
  * Vue.js v1.0.28
@@ -15375,7 +15477,7 @@ setTimeout(function () {
 
 module.exports = Vue;
 }).call(this,require('_process'))
-},{"_process":2}],13:[function(require,module,exports){
+},{"_process":2}],16:[function(require,module,exports){
 var inserted = exports.cache = {}
 
 exports.insert = function (css) {
@@ -15395,7 +15497,7 @@ exports.insert = function (css) {
   return elem
 }
 
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-63ecc141]{\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-63ecc141] {\n  margin: 10px 0;\n}\n")
 'use strict';
@@ -15414,8 +15516,9 @@ module.exports = {
         alert('Пароли не совпадают!');
       } else {
         var promise = this.$auth.register(this.username, this.password);
+        var self = this;
         promise.then(function () {
-          alert('Пользователь зарегистрирован!');
+          self.$router.go('/login');
         });
       }
     }
@@ -15437,4 +15540,4 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-63ecc141", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":12,"vue-hot-reload-api":8,"vueify/lib/insert-css":13}]},{},[3]);
+},{"vue":15,"vue-hot-reload-api":11,"vueify/lib/insert-css":16}]},{},[6]);

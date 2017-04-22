@@ -38,8 +38,9 @@
               alert('Пароли не совпадают!');
           } else {
               var promise = this.$auth.register(this.username, this.password);
+              var self = this;
               promise.then(function() {
-                alert('Пользователь зарегистрирован!');
+                self.$router.go('/login');
               });
           }
         }
