@@ -188,6 +188,12 @@ var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-731435bc] {\n  
 'use strict';
 
 module.exports = {
+    data: function data() {
+        return { photos: [] };
+    },
+    ready: function ready() {
+        this.$http.get('/feed', { bearer: true }).then(function (response) {});
+    },
     methods: {
         upload: function upload(event) {
             event.preventDefault();
@@ -200,7 +206,7 @@ module.exports = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\" _v-731435bc=\"\">\n    <form v-on:submit=\"upload\" _v-731435bc=\"\">\n        <input type=\"file\" accept=\"image/*\" name=\"picture\" _v-731435bc=\"\">\n        <button type=\"submit\" _v-731435bc=\"\">Загрузить!</button>\n    </form>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"container\" _v-731435bc=\"\">\n      <div _v-731435bc=\"\">\n        <form v-on:submit=\"upload\" _v-731435bc=\"\">\n            <input type=\"file\" accept=\"image/*\" name=\"picture\" _v-731435bc=\"\">\n            <button type=\"submit\" _v-731435bc=\"\">Загрузить!</button>\n        </form>\n      </div>\n      <div v-for=\"photo in photos\" class=\"photo panel panel-default\" _v-731435bc=\"\">\n        <div class=\"panel-heading\" _v-731435bc=\"\">\n            {{ photo.user }}\n        </div>\n    \n</div></div>"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -219,13 +225,13 @@ if (module.hot) {(function () {  module.hot.accept()
 'use strict';
 
 module.exports = {
-  ready: function ready() {
-    if (this.$auth.isLoggedIn()) {
-      this.$router.go('/feed');
-    } else {
-      this.$router.go('/login');
+    ready: function ready() {
+        if (this.$auth.isLoggedIn()) {
+            this.$router.go('/feed');
+        } else {
+            this.$router.go('/login');
+        }
     }
-  }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
 if (module.hot) {(function () {  module.hot.accept()
@@ -240,34 +246,34 @@ if (module.hot) {(function () {  module.hot.accept()
 })()}
 },{"vue":15,"vue-hot-reload-api":11}],5:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-24da8c8a]{\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-24da8c8a] {\n  margin: 10px 0;\n}\n")
+var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-24da8c8a] {\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-24da8c8a] {\n    margin: 10px 0;\n}\n")
 'use strict';
 
 module.exports = {
-  data: function data() {
-    return {
-      username: '',
-      password: ''
-    };
-  },
-  methods: {
-    login: function login() {
-      this.$auth.logIn(this.username, this.password).then(function (respone) {
-        this.$router.go('/feed');
-      }).catch(function (response) {
-        console.log(response);
-      });
+    data: function data() {
+        return {
+            username: '',
+            password: ''
+        };
+    },
+    methods: {
+        login: function login() {
+            this.$auth.logIn(this.username, this.password).then(function (response) {
+                this.$router.go('/feed');
+            }).catch(function (response) {
+                console.log(response);
+            });
+        }
     }
-  }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"form-group container\" _v-24da8c8a=\"\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Логин\" v-model=\"username\" _v-24da8c8a=\"\">\n    <input type=\"password\" class=\"form-control\" placeholder=\"Пароль\" v-model=\"password\" _v-24da8c8a=\"\">\n    <button type=\"button\" class=\"btn btn-primary btn-block\" v-on:click=\"login\" _v-24da8c8a=\"\">\n      Войти!\n    </button><button type=\"button\" class=\"btn btn-default btn-block\" v-on:click=\"register\" _v-24da8c8a=\"\">\n      Регистрация\n    </button>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"form-group container\" _v-24da8c8a=\"\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Логин\" v-model=\"username\" _v-24da8c8a=\"\">\n    <input type=\"password\" class=\"form-control\" placeholder=\"Пароль\" v-model=\"password\" _v-24da8c8a=\"\">\n    <button type=\"button\" class=\"btn btn-primary btn-block\" v-on:click=\"login\" _v-24da8c8a=\"\">\n        Login\n    </button>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["\n.container[_v-24da8c8a]{\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-24da8c8a] {\n  margin: 10px 0;\n}\n"] = false
+    __vueify_insert__.cache["\n.container[_v-24da8c8a] {\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-24da8c8a] {\n    margin: 10px 0;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -278,30 +284,34 @@ if (module.hot) {(function () {  module.hot.accept()
 })()}
 },{"vue":15,"vue-hot-reload-api":11,"vueify/lib/insert-css":16}],6:[function(require,module,exports){
 var Vue = require('vue');
-var vueRouter = require('vue-router');
-var VueResourse = require('vue-resource');
+var VueRouter = require('vue-router');
+var VueResource = require('vue-resource');
 var VueJwtMongo = require('vue-jwt-mongo');
 
-Vue.use(VueResourse);
+Vue.use(VueResource);
 Vue.use(VueJwtMongo.Client);
+// Устаналиваем плагин маршрутизации.
+Vue.use(VueRouter);
 
-Vue.use(vueRouter);
-
+// Подключаем компоненту-страницу регистрации.
 var Register = require('./register.vue');
 var Login = require('./login.vue');
 var Feed = require('./feed.vue');
 var Index = require('./index.vue');
 
-var router = new vueRouter();
+// Создаём новый объект маршрутизации.
+var router = new VueRouter();
 
-
+// Задаём соответствия между путями и страницами.
 router.map({
     '/register': { component: Register },
     '/login': { component: Login },
-    '/feed': {component: Feed },
+    '/feed': { component: Feed },
     '/': { component: Index }
 });
 
+// Указываем, что тег router-view находится
+// в теге с идентификатором app.
 router.start(Vue.extend({}), '#app');
 
 },{"./feed.vue":3,"./index.vue":4,"./login.vue":5,"./register.vue":17,"vue":15,"vue-jwt-mongo":12,"vue-resource":13,"vue-router":14}],7:[function(require,module,exports){
@@ -15499,39 +15509,39 @@ exports.insert = function (css) {
 
 },{}],17:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-63ecc141]{\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-63ecc141] {\n  margin: 10px 0;\n}\n")
+var __vueify_style__ = __vueify_insert__.insert("\n.container[_v-63ecc141] {\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-63ecc141] {\n    margin: 10px 0;\n}\n")
 'use strict';
 
 module.exports = {
-  data: function data() {
-    return {
-      username: '',
-      password: '',
-      repeat: ''
-    };
-  },
-  methods: {
-    register: function register() {
-      if (this.password !== this.repeat) {
-        alert('Пароли не совпадают!');
-      } else {
-        var promise = this.$auth.register(this.username, this.password);
-        var self = this;
-        promise.then(function () {
-          self.$router.go('/login');
-        });
-      }
+    data: function data() {
+        return {
+            username: '',
+            password: '',
+            repeat: ''
+        };
+    },
+    methods: {
+        register: function register() {
+            if (this.password !== this.repeat) {
+                alert('Пароли не совпадают!');
+            } else {
+                var promise = this.$auth.register(this.username, this.password);
+                var self = this;
+                promise.then(function () {
+                    self.$router.go('/login');
+                });
+            }
+        }
     }
-  }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"form-group container\" _v-63ecc141=\"\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Логин\" v-model=\"username\" _v-63ecc141=\"\">\n    <input type=\"password\" class=\"form-control\" placeholder=\"Пароль\" v-model=\"password\" _v-63ecc141=\"\">\n    <input type=\"password\" class=\"form-control\" placeholder=\"Повтор пароля\" v-model=\"repeat\" _v-63ecc141=\"\">\n    <button type=\"button\" class=\"btn btn-danger btn-block\" v-on:click=\"register\" _v-63ecc141=\"\">\n      Register\n    </button>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"form-group container\" _v-63ecc141=\"\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Логин\" v-model=\"username\" _v-63ecc141=\"\">\n    <input type=\"password\" class=\"form-control\" placeholder=\"Пароль\" v-model=\"password\" _v-63ecc141=\"\">\n    <input type=\"password\" class=\"form-control\" placeholder=\"Повтор пароля\" v-model=\"repeat\" _v-63ecc141=\"\">\n    <button type=\"button\" class=\"btn btn-danger btn-block\" v-on:click=\"register\" _v-63ecc141=\"\">\n        Register\n    </button>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["\n.container[_v-63ecc141]{\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-63ecc141] {\n  margin: 10px 0;\n}\n"] = false
+    __vueify_insert__.cache["\n.container[_v-63ecc141] {\n    margin: 10px auto;\n    width: 50%;\n}\n\n.form-control[_v-63ecc141] {\n    margin: 10px 0;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
